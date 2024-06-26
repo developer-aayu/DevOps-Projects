@@ -1,3 +1,3 @@
-new file
-edite
-2 editd
+#!/bin/bash
+
+#this is a sample bash file
