@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-REGION="us-east-1a"  # AWS region
+REGION="us-east-1"  # AWS region
 INSTANCE_ID="i-0a197b2e9394d8c21"  # EC2 Instance ID
 
 # Function to start the instance
@@ -33,9 +33,22 @@ check_status() {
   echo "Instance status: $STATUS"
 }
 
+# Function to login to the instance using AWS SSM Session Manager after checking the status
+login_instance() {
+  echo "Checking status of instance: $INSTANCE_ID"
+  STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --region $REGION --query "Reservations[*].Instances[*].State.Name" --output text)
+  
+  if [ "$STATUS" == "running" ]; then
+    echo "Logging into instance: $INSTANCE_ID"
+    aws ssm start-session --target $INSTANCE_ID --region $REGION
+  else
+    echo "Instance is not running. Start the instance to login."
+  fi
+}
+
 # Function to display usage instructions
 usage() {
-  echo "Usage: $0 {start|stop|status}"
+  echo "Usage: $0 {start|stop|status|login}"
   exit 1
 }
 
@@ -49,6 +62,9 @@ case "$1" in
     ;;
   status)
     check_status
+    ;;
+  login)
+    login_instance
     ;;
   *)
     usage
