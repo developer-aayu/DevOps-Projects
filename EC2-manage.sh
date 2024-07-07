@@ -2,7 +2,7 @@
 
 # Configuration
 REGION="us-east-1"  # AWS region
-INSTANCE_ID="i-0a197b2e9394d8c21"  # EC2 Instance ID
+INSTANCE_ID="i-04d74876ec8aa409b"  # EC2 Instance ID
 
 # Function to start the instance
 start_instance() {
