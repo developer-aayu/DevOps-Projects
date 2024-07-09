@@ -1,20 +1,6 @@
 - name: Setup and configure web server
   hosts: webservers
   become: true
-  tasks:
-    - name: Install Nginx
-      apt:
-        name: nginx
-        state: present
-
-    - name: Start and enable Nginx service
-      systemd:
-        name: nginx
-        state: started
-        enabled: true
-
-    - name: Deploy a simple HTML website
-      copy:
-        content: "<h1>Hello from Ansible!</h1>"
-        dest: /var/www/html/index.html
+  roles:
+    - FirstRole
 
