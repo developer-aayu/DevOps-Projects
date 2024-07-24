@@ -1,12 +1,21 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        sh 'node --version'
-      }
+    agent {
+        docker { image 'python:3.9-alpine' }
     }
-  }
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Clone the specific folder from the GitHub repository
+                git 'https://github.com/developer-aayu/DevOps-Projects.git'
+            }
+        }
+        stage('Run Script') {
+            steps {
+                dir('jenkins') {
+                    // Run your Python script
+                    sh 'python your_script.py'
+                }
+            }
+        }
+    }
 }
