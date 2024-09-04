@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: k8simage:latest
+        image: aayusharma1410/go-ci:2
         ports:
         - containerPort: 8000
