@@ -8,5 +8,5 @@ spec:
     app: go-app
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8000
       nodePort: 30007
