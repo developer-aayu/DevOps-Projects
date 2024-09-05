@@ -8,7 +8,28 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/bar"
+        path: "/home"
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/about"
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/courses"
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/contact"
         backend:
           service:
             name: my-service
