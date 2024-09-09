@@ -17,5 +17,28 @@ spec:
       containers:
       - name: go-web-app
         image: aayusharma1410/go-ci:2
+        # using configmaps as env
+
+        # env:
+        #   - name: DEVELOPER-NAME
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         name: test-cm
+        #         key: developer-name 
+        # do kubectl exec -it <podname> -- /bin/bash , and the env | grep DEVELOPER
+
+        # mounting the congifmap volume
+        volumeMounts:
+          - name: developer-name
+            mountPath: /opt
+
+            #after logging in to pods using exec -it , do cat /opt/developer-name | more for getting key value
+  
         ports:
         - containerPort: 8000
+
+      # use configmaps as volume for best practice
+      volumes:
+        - name: developer-name
+          configMap:
+            name: test-cm
